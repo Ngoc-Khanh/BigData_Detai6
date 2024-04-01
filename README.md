@@ -12,12 +12,9 @@
 3.7. Có bao nhiêu nhóm tuổi có người da trắng? Liệt kê các nhóm tuổi là người da trắng  
 3.8. Tìm những nhóm tuổi có marital-status bắt đầu bằng “Married”  
 3.9. Xoay giá trị trong cột gender thành nhiều cột với mỗi cột là một giá trị theo yêu cầu sau: dữ liệu trong cột là tổng số education-num của nhóm dữ liệu nghề nghiệp (Occupitation)  
-| Header | Header | Right  |
-|:-------|:------:|-------:|
 |  Occupitation  |  Male  |   Femail  |
 |  Adm-clerical  |  10  |   50  |
 |  Other-service  |  Null  |   100  | 
-
 3.10. Tạo một cột mới có giá trị là: Nếu gender = Male thì điền giá trị là M, Nếu gende = Female thì điền giá trị là\\
 ## Câu 4. Sử dụng dữ liệu giải đấu laliga từ năm 2018 đến 2021 (file đính kèm) để thực hành stream tổng hợp tìm ra đội có số trận thua trên sân nhà nhiều nhất mùa giải, cùng với đó là tổng số bàn thua của họ.
 FTR and Res = Full Time Result (H=Home Win, D=Draw, A=Away Win)  
