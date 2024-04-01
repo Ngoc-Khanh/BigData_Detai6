@@ -17,7 +17,7 @@
 |  Occupitation  |  Male  |   Femail  |
 |  Adm-clerical  |  10  |   50  |
 |  Other-service  |  Null  |   100  |
-| ====== | ====== | =====: |
+| :====== | :======: | =====: |
 | Footer | Footer | Footer |  
 
 3.10. Tạo một cột mới có giá trị là: Nếu gender = Male thì điền giá trị là M, Nếu gende = Female thì điền giá trị là\\
