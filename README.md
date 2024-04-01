@@ -1,7 +1,7 @@
 # BigData_Detai6
 
-Câu 1. Nêu các đặc điểm của MapReduce Hadoop – so sánh với spark?
-Câu 2. Thế nào là tính toán phân tán, tính toán song song? Nếu một vài ví dụ thực tiễn sử dụng tính toán phân tán và tính toán song song?
+# Câu 1. Nêu các đặc điểm của MapReduce Hadoop – so sánh với spark?
+# Câu 2. Thế nào là tính toán phân tán, tính toán song song? Nếu một vài ví dụ thực tiễn sử dụng tính toán phân tán và tính toán song song?
 Câu 3. Sử dụng file census_1000.csv (Điều tra dân số)
 3.1. Đọc dữ liệu từ file census_1000.csv vào dataframe hoặc RDD./
 3.2. Có bao nhiêu nhóm tuổi được đề cập trong dữ liệu? Liệt kê các nhóm tuổi./
