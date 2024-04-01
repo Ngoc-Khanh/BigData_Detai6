@@ -22,6 +22,6 @@
 
 3.10. Tạo một cột mới có giá trị là: Nếu gender = Male thì điền giá trị là M, Nếu gende = Female thì điền giá trị là\\
 ## Câu 4. Sử dụng dữ liệu giải đấu laliga từ năm 2018 đến 2021 (file đính kèm) để thực hành stream tổng hợp tìm ra đội có số trận thua trên sân nhà nhiều nhất mùa giải, cùng với đó là tổng số bàn thua của họ.
-FTR and Res = Full Time Result (H=Home Win, D=Draw, A=Away Win)\\
-FTHG and HG = Full Time Home Team Goals,\\
-FTAG and AG = Full Time Away Team Goals)\\
+FTR and Res = Full Time Result (H=Home Win, D=Draw, A=Away Win)  
+FTHG and HG = Full Time Home Team Goals,  
+FTAG and AG = Full Time Away Team Goals)  
