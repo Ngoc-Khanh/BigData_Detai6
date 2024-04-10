@@ -1,10 +1,10 @@
 import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.types import IntegerType
-from pyspark.sql.functions import sum, col, when, lower
+from pyspark.sql.functions import sum, col, when, lower, count
 
 # Tạo SparkSession
-spark = SparkSession.builder.appName("detai3").getOrCreate()
+spark = SparkSession.builder.appName("detai6").getOrCreate()
 
 # 3.1
 print("\n3.1. Đọc dữ liệu từ file census_1000.csv vào DataFrame.")
@@ -39,28 +39,28 @@ df = df.withColumn("education-num", df["education-num"].cast(IntegerType()))
 # Thay đổi định dạng dữ liệu của cột "age" thành Integer
 df = df.withColumn("age", df["age"].cast(IntegerType()))
 # Hiển thị một số dòng của DataFrame để kiểm tra kết quả
-df.show(5)
+df.printSchema()
 
 # 3.5
 print("\n3.5. Tìm nhóm tuổi có số lượng “Education-num” lớn nhất")
 # Nhóm dữ liệu theo cột "age" và tính tổng số lượng "Education-num" trong mỗi nhóm
-max_education_age_group = df.groupBy("age").agg(sum("education-num").alias("total_education_num")).orderBy("total_education_num", ascending=False).first()
+max_education_age_group = df.groupBy("age").agg(count("education-num").alias("total_education_num")).orderBy("total_education_num", ascending=False).first()
 # Hiển thị kết quả
-print("Nhóm tuổi có số lượng 'Education-num' lớn nhất:")
-print("Tuổi:", max_education_age_group["age"])
-print("Tổng số lượng 'Education-num':", max_education_age_group["total_education_num"])
+print("Nhóm tuổi có số lượng 'Education-num' lớn nhất:", max_education_age_group["age"])
+# print("Tuổi:", max_education_age_group["age"])
+# print("Tổng số lượng 'Education-num':", max_education_age_group["total_education_num"])
 
 # 3.6
 print("\n3.6. Tìm nhóm tuổi là nữ chưa kết hôn “never-married” là người da trắng ") 
-# Lọc dữ liệu để chỉ giữ lại các dòng thỏa mãn các điều kiện
-filtered_data = df.filter((df["gender"] == " Female") & (df["marital-status"] == " Never-married") & (df["ethnicity"] == " White"))
-# Kiểm tra xem có dòng nào thỏa mãn không
-if filtered_data.count() == 0:
-    print("Không có nhóm tuổi nào là nữ chưa kết hôn ('never-married') và là người da trắng.")
-else:
-    # Hiển thị kết quả
-    print("Nhóm tuổi là nữ chưa kết hôn ('never-married') và là người da trắng:")
-    filtered_data.show()
+# Lọc các hàng thỏa mãn điều kiện "never-married" và chủng tộc là da trắng
+filtered_df = df.filter((col("marital-status") == " Never-married") & (col("ethnicity") == " White") & (col("gender") == " Female"))
+# Tính toán và hiển thị nhóm tuổi của phụ nữ này
+age_groups = filtered_df.groupBy("age").count().orderBy("age")
+# age_groups.show()
+# Đếm số lượng nhóm tuổi
+num_age_groups = age_groups.count()
+print("Nhóm tuổi là nữ chưa kết hôn “never-married” là người da trắng là: ", num_age_groups)
+    
 
 # 3.7
 print("\n3.7. Có bao nhiêu nhóm tuổi có người da trắng? Liệt kê các nhóm tuổi là người da trắng")
