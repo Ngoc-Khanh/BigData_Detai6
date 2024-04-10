@@ -1,22 +1,33 @@
-from pyspark.sql import SparkSession
 import pyspark
-from pyspark.sql.functions import sum, col, when, lower, count
-# Khởi tạo Spark session
-spark = SparkSession.builder.appName("EducationSumByAge").getOrCreate()
+from pyspark.sql import SparkSession
+from pyspark.sql.types import IntegerType
+from pyspark.sql.functions import count,desc, year,sum, lit,when,min,col, max,avg,split,explode,count,lower
 
-# Đọc dữ liệu từ file CSV vào DataFrame
-df = spark.read.csv("census_1000.csv", header=True, inferSchema=True)
+spark = SparkSession.builder.appName("TEST_FILE").getOrCreate()
 
-# Lọc các hàng thỏa mãn điều kiện "never-married" và chủng tộc là da trắng
-filtered_df = df.filter((col("marital-status") == " Never-married") & (col("ethnicity") == " White") & (col("gender") == " Female"))
+# print("3.1")
+df = spark.read.csv("census_1000.csv", header = True, inferSchema = True)
+# df.show(5)
 
-# Tính toán và hiển thị nhóm tuổi của phụ nữ này
-age_groups = filtered_df.groupBy("age").count().orderBy("age")
-age_groups.show()
+# print("3.2")
+# age_groups = df.select("age").distinct().orderBy("age")
+# total_age_groups = age_groups.count()
+# print("Số nhóm tuổi được đề cập trong dữ liệu", total_age_groups)
+# print("Liệt kê")
+# age_groups.show(total_age_groups, truncate = False)\
 
-# Đếm số lượng nhóm tuổi
-num_age_groups = age_groups.count()
-print("Số lượng nhóm tuổi của phụ nữ chưa kết hôn và có chủng tộc là da trắng là:", num_age_groups)
+# print("3.3")
+# bachelors_age_groups = df.filter(df["education"] == " Bachelors").select("age").distinct()
+# total_bachelors = bachelors_age_groups.count()
+# bachelors_age_groups.show(total_bachelors, truncate = False)
 
-# Đóng SparkSession
-spark.stop()
+# print("3.4")
+# df = df.withColumn("education-num", df["education-num"].cast(IntegerType()))
+# df = df.withColumn("age", df["age"].cast(IntegerType()))
+# df.printSchema()
+
+print(3.5)
+max_education_age_groups = df.groupBy("age", "education-num").count().groupBy(col("count").desc()).select("age", "education-num").first()
+print("Tổng: ", max_education_age_groups.age)
+filter_data = df.filter(df["age"] == max_education_age_groups.age)
+filter_data.select("education-num").distinct().show()

@@ -3,7 +3,6 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 
-
 # Định nghĩa schema cho dữ liệu CSV
 schema = StructType([
     StructField("Div", StringType(), nullable=True),
